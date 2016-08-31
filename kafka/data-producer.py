@@ -21,6 +21,12 @@ logger.setLevel(logging.DEBUG)  # TRACE, DEBUG, INFO, WARN, ERROR
 
 
 def fetch_price(producer, stock_symbol):
+    """
+    helper function to retrieve stock data and send it to kafka
+    :param producer: instance of a kafka producer
+    :param stock_symbol: symbol of the stock
+    :return: None
+    """
     price = json.dumps(getQuotes(stock_symbol))
     logger.debug('Get stock price %s', price)
 
@@ -33,6 +39,11 @@ def fetch_price(producer, stock_symbol):
 
 
 def shutdown_hook(producer):
+    """
+    This a shutdown hook to be called before the shutdown
+    :param producer: instance of a kafka producer
+    :return: None
+    """
     logger.info('preparing to shutdown, waiting for producer to flush message')
     producer.flush(10)  # send holding data first and stop fetching new data
     logger.info('producer flush finished')
