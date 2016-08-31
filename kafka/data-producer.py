@@ -17,19 +17,29 @@ KAFKA_PORT = '9092'
 logging_format = '%(asctime)-15s %(message)s'
 logging.basicConfig(format=logging_format)
 logger = logging.getLogger('data-producer')
-logger.setLevel(logging.DEBUG) # TRACE, DEBUG, INFO, WARN, ERROR
+logger.setLevel(logging.DEBUG)  # TRACE, DEBUG, INFO, WARN, ERROR
+
 
 def fetch_price(producer, stock_symbol):
     price = json.dumps(getQuotes(stock_symbol))
     logger.debug('Get stock price %s', price)
-    producer.send(topic=topic_name, value=price, timestamp_ms=time.time())
+
+    try:
+        producer.send(topic=topic_name, value=price, timestamp_ms=time.time())
+    except Exception:
+        logger.warn('Failed to send message to kafka')
+
     logger.debug('Successfully sent data to Kafka')
+
 
 def shutdown_hook(producer):
     logger.info('preparing to shutdown, waiting for producer to flush message')
-    producer.flush(10) # send holding data first and stop fetching new data
+    producer.flush(10)  # send holding data first and stop fetching new data
     logger.info('producer flush finished')
-    producer.close()
+    try:
+        producer.close()
+    except Exception:
+        logger.warn('Producer failed to close')
     logger.info('producer closed')
 
 # - setup command line arguments
@@ -57,8 +67,3 @@ if __name__ == '__main__':
     while True:
         schedule.run_pending()
         time.sleep(5)
-
-
-
-
-
