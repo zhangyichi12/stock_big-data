@@ -1,3 +1,4 @@
 # Untracked files:
 .DS_Store
 /.idea/*
+/cassandra/apache-cassandra-3.7/*

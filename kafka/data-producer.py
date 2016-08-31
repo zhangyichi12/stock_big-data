@@ -9,8 +9,9 @@ import atexit
 
 from googlefinance import getQuotes
 
-# - SERVER_IP_ADDRESS = '159.203.87.185'
+#KAFKA_IP_ADDRESS = '159.203.87.185'
 KAFKA_IP_ADDRESS = '192.168.99.100'
+#KAFKA_IP_ADDRESS = '127.0.0.1'
 KAFKA_PORT = '9092'
 
 # - config logging information
@@ -63,9 +64,10 @@ if __name__ == '__main__':
     # - parse arguments, default arguments
     args = parser.parse_args()
     stock_symbol = args.stock_symbol
-    topic_name = args.topic_name or 'stock-analyzer-2'
+    topic_name = args.topic_name or 'stock-analyzer'
     kafka_broker = args.kafka_broker or (KAFKA_IP_ADDRESS + ':' + KAFKA_PORT)
 
+    # - setup kafka producer
     producer = KafkaProducer(bootstrap_servers=kafka_broker)
 
     # - schedule and run every second
