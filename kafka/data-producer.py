@@ -5,6 +5,7 @@ import time
 import json
 import logging
 import schedule
+import atexit
 
 from googlefinance import getQuotes
 
@@ -24,6 +25,13 @@ def fetch_price(producer, stock_symbol):
     producer.send(topic=topic_name, value=price, timestamp_ms=time.time())
     logger.debug('Successfully sent data to Kafka')
 
+def shutdown_hook(producer):
+    logger.info('preparing to shutdown, waiting for producer to flush message')
+    producer.flush(10) # send holding data first and stop fetching new data
+    logger.info('producer flush finished')
+    producer.close()
+    logger.info('producer closed')
+
 # - setup command line arguments
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -41,6 +49,9 @@ if __name__ == '__main__':
 
     # - schedule and run every second
     schedule.every().second.do(fetch_price, producer, stock_symbol)
+
+    # - register shutdown hook
+    atexit.register(shutdown_hook, producer)
 
     # - kick start schedule
     while True:
