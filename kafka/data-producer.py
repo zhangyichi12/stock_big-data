@@ -4,6 +4,7 @@ import argparse
 import time
 import json
 import logging
+import schedule
 
 from googlefinance import getQuotes
 
@@ -36,9 +37,16 @@ if __name__ == '__main__':
     topic_name = args.topic_name or 'stock-analyzer-2'
     kafka_broker = args.kafka_broker or (KAFKA_IP_ADDRESS + ':' + KAFKA_PORT)
 
-
     producer = KafkaProducer(bootstrap_servers=kafka_broker)
-    fetch_price(producer, stock_symbol)
+
+    # - schedule and run every second
+    schedule.every().second.do(fetch_price, producer, stock_symbol)
+
+    # - kick start schedule
+    while True:
+        schedule.run_pending()
+        time.sleep(5)
+
 
 
 
