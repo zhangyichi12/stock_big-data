@@ -6,16 +6,33 @@ import json
 import logging
 import atexit
 
-#KAFKA_IP_ADDRESS = '159.203.87.185'
+# KAFKA_IP_ADDRESS = '159.203.87.185'
 KAFKA_IP_ADDRESS = '192.168.99.100'
-#KAFKA_IP_ADDRESS = '127.0.0.1'
+# KAFKA_IP_ADDRESS = '127.0.0.1'
 KAFKA_PORT = '9092'
 
 CASSANDRA_IP_ADDRESS = '192.168.99.100'
 
+# - config logging information
+logging_format = '%(asctime)-15s %(message)s'
+logging.basicConfig(format=logging_format)
+logger = logging.getLogger('data-storage')
+logger.setLevel(logging.DEBUG)  # TRACE, DEBUG, INFO, WARN, ERROR
 
-def save_data(cassandra_session, msg):
-    print(msg)
+
+def save_data(cassandra_session, value):
+    # - msg is kafka ConsumerRecord Object
+    parsed_data = json.loads(value)[0]
+    stock_symbol = parsed_data.get('StockSymbol')
+    trade_time = parsed_data.get('LastTradeDateTime')
+    trade_price = float(parsed_data.get('LastTradePrice'))
+
+    logger.info('received data from Kafka %s', parsed_data)
+
+    # - use CQL statement to insert data
+    statement = "INSERT INTO %s (stock_symbol, trade_time, trade_price) VALUES ('%s', '%s', %f)" % (data_table, stock_symbol, trade_time, trade_price)
+    cassandra_session.execute(statement)
+    logger.info('Saved data to cassandra, stock: %s, tradetime: %s, tradeprice: %f' % (stock_symbol, trade_time, trade_price))
 
 
 if __name__ == '__main__':
@@ -42,4 +59,5 @@ if __name__ == '__main__':
     session = cassandra_cluster.connect(key_space)
 
     for msg in consumer:
-        save_data(session, msg)
+        # logger.info(msg.value)
+        save_data(session, msg.value)

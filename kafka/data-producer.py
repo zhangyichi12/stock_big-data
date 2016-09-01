@@ -9,9 +9,9 @@ import atexit
 
 from googlefinance import getQuotes
 
-#KAFKA_IP_ADDRESS = '159.203.87.185'
+# KAFKA_IP_ADDRESS = '159.203.87.185'
 KAFKA_IP_ADDRESS = '192.168.99.100'
-#KAFKA_IP_ADDRESS = '127.0.0.1'
+# KAFKA_IP_ADDRESS = '127.0.0.1'
 KAFKA_PORT = '9092'
 
 # - config logging information
