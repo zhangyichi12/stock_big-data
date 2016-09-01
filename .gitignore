@@ -2,3 +2,4 @@
 .DS_Store
 /.idea/*
 /cassandra/apache-cassandra-3.7/*
+/spark/spark-2.0.0-bin-hadoop2.7/*
