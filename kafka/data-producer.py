@@ -51,7 +51,7 @@ def shutdown_hook(producer):
     try:
         producer.close()
     except Exception:
-        logger.warn('Producer failed to close')
+        logger.warn('producer failed to close')
     logger.info('producer closed')
 
 # - setup command line arguments
