@@ -28,6 +28,7 @@ logging.basicConfig(format=logging_format)
 logger = logging.getLogger('stream-process')
 logger.setLevel(logging.DEBUG)  # TRACE, DEBUG, INFO, WARN, ERROR
 
+
 # - rdd: abstract of data
 def process(timeobj, rdd):
     num_of_records = rdd.count()
@@ -49,6 +50,7 @@ def process(timeobj, rdd):
         kafka_producer.send(topic=new_topic_name, value=data)
     except KafkaError as error:
         logger.warn('Failed to send average stock price to kafka, caused by: %s', error.message)
+
 
 def shutdown_hook(producer):
     """
