@@ -40,7 +40,7 @@ def process(timeobj, rdd):
     price_sum = rdd\
         .map(lambda record: float(json.loads(record[1].decode('utf-8'))[0].get('LastTradePrice')))\
         .reduce(lambda a, b: a + b)
-    average_price = round(price_sum / num_of_records, 6)
+    average_price = price_sum / num_of_records
     logger.info('Received records from Kafka, average price is %f' % average_price)
     current_time = time.time()
     data = json.dumps({'timestamp': current_time, 'average': average_price})

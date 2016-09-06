@@ -20,10 +20,17 @@ class StockApp extends Component {
     }
 
     render() {
-        var format_data = {
+        let stock_symbol = 'GOOGL';
+        let format_data = {
             date: new Date(Math.trunc(this.props.stock_data.timestamp * 1000)),
-            AAPL: this.props.stock_data.average
+            // GOOGL: this.props.stock_data.average
         }
+        let stock_price = this.props.stock_data.average
+        if(stock_price) {
+            stock_price = Number(stock_price.toFixed(3));
+        }
+        format_data[stock_symbol] = stock_price
+        console.log(stock_price);
         return (
             <div>
                 <Nav active='stock'/>
@@ -31,8 +38,10 @@ class StockApp extends Component {
                     <div className="row">
                         <div className="col-md-8 col-md-offset-2">
                             <RTChart
-                                fields={['AAPL']}
-                                data={ format_data }
+                                fields = {[ stock_symbol ]}
+                                data = { format_data }
+                                maxValues = { 1000 }
+                                flow = { {duration: 200} }
                             />
                         </div>
                     </div>

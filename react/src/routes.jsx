@@ -8,9 +8,9 @@ import StockApp from './containers/container_stock/stock_app.jsx';
 
 export default (
     <Route path="/" component={App} >
-        <IndexRoute component={VideoApp} />
+        <IndexRoute component={StockApp} />
+        <Route path="stock" component={StockApp} />
         <Route path="video" component={VideoApp} />
         <Route path="weather" component={WeatherApp} />
-        <Route path="stock" component={StockApp} />
     </Route>
 )

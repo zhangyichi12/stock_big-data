@@ -18,16 +18,16 @@ export default (props) => {
                     <a className="navbar-brand" href="http://yichizhang.us">Do Something Fun</a>
                 </div>
                 <ul className="nav navbar-nav">
+                    <li className={stockActive}>
+                        <Link to={'/stock'}>Stock</Link>
+                    </li>
+                    
                     <li className={videoActive}>
                         <Link to={'/video'} >Video</Link>
                     </li>
 
                     <li className={weatherActive}>
                         <Link to={'/weather'}>Weather</Link>
-                    </li>
-
-                    <li className={stockActive}>
-                        <Link to={'/stock'}>Stock</Link>
                     </li>
                 </ul>
             </div>
