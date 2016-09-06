@@ -5,16 +5,16 @@ import ActiveVideoReducer from './reducer_video/reducer_active_video.jsx';
 
 import WeatherReducer from './reducer_weather/reducer_city_weather.jsx';
 
-// import BooksReducer from './reducer_books/reducer_books.jsx';
-// import ActiveBookReducer from './reducer_books/reducer_active_book.jsx';
+import StockReducer from './reducer_stock/reducer_stock';
+
 
 const rootReducer = combineReducers({
-    // books: BooksReducer,
-    // activeBook: ActiveBookReducer,
     videos: VideosReducer,
     activeVideo: ActiveVideoReducer,
     
-    weather: WeatherReducer
+    weather: WeatherReducer,
+    
+    stock_data: StockReducer
 });
 
 export default rootReducer;

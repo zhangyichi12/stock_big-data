@@ -8,6 +8,9 @@ export default (props) => {
     else if(props.active === 'weather') {
         var weatherActive = 'active';
     }
+    else if(props.active === 'stock') {
+        var stockActive = 'active';
+    }
     return (
         <nav className="navbar navbar-default">
             <div className="container-fluid">
@@ -21,6 +24,10 @@ export default (props) => {
 
                     <li className={weatherActive}>
                         <Link to={'/weather'}>Weather</Link>
+                    </li>
+
+                    <li className={stockActive}>
+                        <Link to={'/stock'}>Stock</Link>
                     </li>
                 </ul>
             </div>

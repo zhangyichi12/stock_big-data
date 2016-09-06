@@ -2,8 +2,7 @@
 
 ## Setup guide
 
-1. Install NodeJS and pull code from:
-`https://github.com/zhangyichi12/Video-Weather-Note_Client.git`
+1. Install NodeJS.
 2. In the root folder run `npm intall`.
 
 ## Usage

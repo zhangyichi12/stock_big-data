@@ -1,6 +1,15 @@
 # Untracked files:
 .DS_Store
 /.idea/*
+
 /cassandra/apache-cassandra-3.7/*
+
 /spark/spark-2.0.0-bin-hadoop2.7/*
+
 /nodejs/node_modules/*
+/nodejs/.idea/*
+
+/react/node_modules/*
+/react/.idea/*
+/react/.DS_Store
+/react/npm-debug.log
