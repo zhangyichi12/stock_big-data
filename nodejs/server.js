@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 import redis from 'redis';
-const redis_host = process.env.REDIS_HOST || '192.168.99.100';
+const redis_host = process.env.REDIS_HOST || '159.203.87.185';
 const redis_port = process.env.REDIS_PORT || '6379';
 const subscribe_channel = process.env.SUBSCRIBE_CHANNEL || 'spark-average-stock-price';
 
