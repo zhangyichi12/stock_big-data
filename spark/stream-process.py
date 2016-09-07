@@ -28,18 +28,24 @@ logging.basicConfig(format=logging_format)
 logger = logging.getLogger('stream-process')
 logger.setLevel(logging.DEBUG)  # TRACE, DEBUG, INFO, WARN, ERROR
 
+def maprdd(record):
+    price = json.loads(record[1].decode('utf-8'))[0].get('LastTradePrice');
+    format_price = price.replace(',', '')
+    return float(format_price)
+
+def reducerdd(a, b):
+    return a + b
 
 # - rdd: abstract of data
 def process(timeobj, rdd):
     num_of_records = rdd.count()
+    print(num_of_records)
     if num_of_records == 0:
         return
 
     # - for each rdd records, do something (take out the LastTradingPrice, json)
     # - for all the rdd records, sum up -> reduce
-    price_sum = rdd\
-        .map(lambda record: float(json.loads(record[1].decode('utf-8'))[0].get('LastTradePrice')))\
-        .reduce(lambda a, b: a + b)
+    price_sum = rdd.map(maprdd).reduce(reducerdd)
     average_price = price_sum / num_of_records
     logger.info('Received records from Kafka, average price is %f' % average_price)
     current_time = time.time()

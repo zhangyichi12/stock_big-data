@@ -20,7 +20,7 @@ class StockApp extends Component {
     }
 
     render() {
-        let stock_symbol = 'GOOGL';
+        let stock_symbol = 'NASDAQ(.IXIC)';
         let format_data = {
             date: new Date(Math.trunc(this.props.stock_data.timestamp * 1000)),
             // GOOGL: this.props.stock_data.average
