@@ -12,11 +12,11 @@ import schedule
 import atexit
 
 
-# KAFKA_IP_ADDRESS = '159.203.87.185'
-KAFKA_IP_ADDRESS = '192.168.99.100'
-# KAFKA_IP_ADDRESS = '127.0.0.1'
+KAFKA_IP_ADDRESS = '159.203.87.185'
+# KAFKA_IP_ADDRESS = '192.168.99.100'
 KAFKA_PORT = '9092'
-REDIS_IP_ADDRESS = '192.168.99.100'
+REDIS_IP_ADDRESS = '159.203.87.185'
+# REDIS_IP_ADDRESS = '192.168.99.100'
 REDIS_PORT = '6379'
 
 
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     # - parse arguments, default arguments
     args = parser.parse_args()
     topic_name = args.topic_name or 'spark-average-stock-price'
-    kafka_broker = args.kafka_broker or (KAFKA_IP_ADDRESS + ':' + KAFKA_PORT)
+    kafka_broker = (args.kafka_broker or KAFKA_IP_ADDRESS) + ':' + KAFKA_PORT
     redis_channel = args.redis_channel or 'spark-average-stock-price'
     redis_host = args.redis_host or REDIS_IP_ADDRESS
     redis_port = args.redis_port or REDIS_PORT
