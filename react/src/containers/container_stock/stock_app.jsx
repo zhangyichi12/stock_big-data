@@ -9,7 +9,7 @@ import RTChart from 'react-rt-chart';
 
 import Nav from '../../components/Nav.jsx';
 
-const SOCKET_IO_HOST = process.env.SOCKET_IO_HOST || 'http://localhost';
+const SOCKET_IO_HOST = '159.203.87.185';
 var io = socketio.connect(`${SOCKET_IO_HOST}:3001`);
 
 class StockApp extends Component {
