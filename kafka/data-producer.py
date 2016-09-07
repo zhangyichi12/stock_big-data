@@ -57,13 +57,13 @@ def shutdown_hook(producer):
 # - setup command line arguments
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('stock_symbol', help='the stock symbol')
+    parser.add_argument('--stock_symbol', help='the stock symbol')
     parser.add_argument('--topic_name', help='the kafka topic to push to')
     parser.add_argument('--kafka_broker', help='location of kafka broker')
 
     # - parse arguments, default arguments
     args = parser.parse_args()
-    stock_symbol = args.stock_symbol
+    stock_symbol = args.stock_symbol or '.IXIC'
     topic_name = args.topic_name or 'stock-analyzer'
     kafka_broker = args.kafka_broker or (KAFKA_IP_ADDRESS + ':' + KAFKA_PORT)
 
