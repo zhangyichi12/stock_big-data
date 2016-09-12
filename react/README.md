@@ -1,9 +1,10 @@
 ## React Proj
+Get data from socket.io and draw real-time stock data point on the graph.
+You can also watch Youtube video. :)
 
 ## Setup guide
 
-1. Install NodeJS.
-2. In the root folder run `npm intall`.
+In the root folder run `npm install`.
 
 ## Usage
 1. If you have Google Chrome and your `8080` port is not being taken, you can run `npm start` and webpage will pop up. Enjoy.

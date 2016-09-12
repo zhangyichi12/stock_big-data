@@ -17,9 +17,12 @@ pip install -r requirements.txt
 ```
 
 ### how to run
+
+Kafka running on a docker-machine named 'bigdata' and ip address is 192.168.99.100
+
 Three arguments:
 
-mandatory:    `stock_symbol`
+mandatory:    `--stock_symbol` default is `.IXIC`(NASDAQ)
 
 optional:     `--topic_name` default value is `stock-analyzer`
 
@@ -32,5 +35,5 @@ python simple-data-producer.py your_stock_name
 or
 
 ```sh
-python simple-data-producer.py your_stock_name --topic_name your_name --kafka_broker your_host_address
+python data-producer.py
 ```
