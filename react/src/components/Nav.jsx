@@ -26,9 +26,9 @@ export default (props) => {
                         <Link to={'/video'} >Video</Link>
                     </li>
 
-                    {/*<li className={weatherActive}>*/}
-                        {/*<Link to={'/weather'}>Weather</Link>*/}
-                    {/*</li>*/}
+                    <li className={weatherActive}>
+                        <Link to={'/weather'}>Weather</Link>
+                    </li>
                 </ul>
             </div>
         </nav>

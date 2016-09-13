@@ -11,6 +11,6 @@ export default (
         <IndexRoute component={StockApp} />
         <Route path="stock" component={StockApp} />
         <Route path="video" component={VideoApp} />
-        {/*<Route path="weather" component={WeatherApp} /> */}
+        <Route path="weather" component={WeatherApp} />
     </Route>
 )
