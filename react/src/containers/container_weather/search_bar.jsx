@@ -50,7 +50,7 @@ export class SearchBar extends Component {
             >
                 <span className="input-group-addon  glyphicon glyphicon-certificate" aria-hidden="true"></span>
                 <input className="form-control"
-                    placeholder={`City with five day forecast from today (${Today.getMonth()}/${Today.getDate()}/${Today.getFullYear()})`}
+                    placeholder={`City with five day forecast from today (${Today.getMonth()+1}/${Today.getDate()}/${Today.getFullYear()})`}
                     value={this.state.term}
                     onChange={
                         (event) => {
